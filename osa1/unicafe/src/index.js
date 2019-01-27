@@ -75,6 +75,18 @@ const Statistics = (props) => {
 
 }
 
+const Button = (props) => {
+
+	return (
+		<div>
+		<button onClick={() => props.clb()}>
+			{props.name}
+		</button>
+		</div>
+	)
+
+}
+
 const App = () => {
 	const [good, setGood] = useState(0)
 	const [neutral, setNeutral] = useState(0)
@@ -86,13 +98,26 @@ const App = () => {
 		"bad": bad
 	}
 
+	const sGood = () => {
+		//console.log("sGood -->")
+		setGood(good + 1)
+	}
+	const sNeutral = () => {
+		//console.log("sNeutral ---->")
+		setNeutral(neutral + 1)
+	}
+	const sBad = () => {
+		//console.log("sBad --->")
+		setBad(bad+1)
+	}
 
 	return (
 		<div>
 			<h1>Anna palautetta</h1>
-			<p>
-				<button onClick={() => setGood(good + 1)} >hyvä</button><button onClick={() => setNeutral(neutral + 1)} >neutraali</button><button onClick={() => setBad(bad + 1)} >huono</button>
-			</p>
+				<Button data={data} clb={sGood} name={"hyvä"} />
+				<Button data={data} clb={sNeutral} name={"neutraali"} />
+				<Button data={data} clb={sBad} name={"huono"} />
+		
 				<Statistics data={data} />
 		</div>
 	)
