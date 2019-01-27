@@ -5,9 +5,9 @@ const aanestykset = {
 	0: 0,
 	1: 0,
 	2: 0,
-	3: 3,
-	4: 4,
-	5: 2 
+	3: 0,
+	4: 0,
+	5: 0 
 }
 
 const highest_id = () => {
@@ -15,10 +15,10 @@ const highest_id = () => {
 	var first = 1
 	var key = 0
 	var this_key = 0
-	console.log(aanestykset.length)
+	//console.log(aanestykset.length)
 
 	for (key in aanestykset) {
-		console.log("key: " + key + ": " + aanestykset[key])
+		//console.log("key: " + key + ": " + aanestykset[key])
 		//var ind = parseInt(key)
 		if (first) {
 			first = 0
@@ -27,15 +27,15 @@ const highest_id = () => {
 		} else {
 			if (max1 < aanestykset[key]) {
 				max1 = aanestykset[key]
-				console.log("max1: " + max1)
+				//console.log("max1: " + max1)
 				this_key = key
 			} else {
-				console.log("PERKL: " + max1 + " <-> " + aanestykset[key])
+				//console.log("PERKL: " + max1 + " <-> " + aanestykset[key])
 			}
 		}
 
 	}
-	console.log("HUUUUUAUAH: " + this_key)
+	//console.log("HUUUUUAUAH: " + this_key)
 	return ([max1, this_key])
 }
 
@@ -43,10 +43,49 @@ const kala = (foo) => {
 	console.log("foo: " + foo)
 }
 
-const Mostvotes = () => {
+const Mostvotes = (props) => {
+	const [highestID, setHighestID] = useState(0)
+	const [highestVote, setHighestVote] = useState(0)
+
 	console.log("Mostvotes")
-	kala("huortuauuahh")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+	console.log("##############################################")
+
 	let [vote_count, index] = highest_id(aanestykset)
+
+	console.log("vote_count: " + vote_count)
+	console.log("index: " + index)
+
+	//setHighestID(index)
+	//setHighestVote(vote_count)
+
+	//if (highestID > vote_count) {
+	//	setHighestID(index)
+	//	setHighestVote(vote_count)
+	//	aanestykset[index] = vote_count
+	//}
+	console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<")
+	console.log("FOOOO: " + highestVote)
+	console.log("BAAAR: " + highestID)
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
+	return (
+		<div>
+			<h1>Jotain anekdootteja</h1>
+			<p>
+				{anecdotes[highestID]}
+				<br />
+				This got {highestVote} votes
+			</p>
+		</div>
+	)
 
 	console.log("index: " + index["index"])
 	console.log("max: " + vote_count+ " index: "+ index)
@@ -62,9 +101,9 @@ const Mostvotes = () => {
 		<div>
 			<h1>Anecdote with most votes</h1>
 			<p>
-				{anecdotes[index]}
+				{anecdotes[props.selected]}
 				<br />
-				This got {vote_count} votes
+				This got {props.most_votes} votes
 			</p>
 		</div>
 	)
@@ -83,37 +122,128 @@ const Button = (props) => {
 		<button onClick={() => props.clb()}>
 			{props.name}
 		</button>
-		<button onClick={() => props.vote_clb(props.curr_ptr())}>
+		<button onClick={() => props.vote_clb(props.selected)}>
 			vote
 		</button>
 		</div>
 	)
 
 }
+const Test = (props) => {
+	return (
+		<div>
+			<button onClick={() => props.saato(props.name)} >
+				kalaa
+				{props.laskuri}
+			</button>
+			
+		</div>
+	)
+}
 
 const App = (props) => {
 	let ra =  Math.round((Math.random()*999999) % (props.anecdotes.length-1))
-	const [selected, setSelected] = useState(ra)
-	
+	const [highest, setHighest] = useState(0)
+	const [hSelected, setHSelected] = useState(0)
+	//const [selected, setSelected] = useState(ra)
+	const [selected,setSelected] = useState(0)
+	const [votes, setVotes] = useState(0)
+	const [laskuri, setLaskuri] = useState(0)
+
 	const push_button = () => {
 		let r = Math.round((Math.random()*999999) % (props.anecdotes.length-1))
-		setSelected(r)
+		if (selected === r) {
+			// do nothing
+		} else {
+			setSelected(r)
+		}
+
+		let vote = aanestykset[r]
+		console.log("votetus push_buttonissa: " + vote)
+		//setHSelected(vote)
+		//setHSelected(r)
+
 	}
 	const curr_ptr = () => {
 		return selected
 	}
 
-	const push_vote = () => {
-		update_tbl(curr_ptr())
+	const tilapainen_suurin = 0
+	const push_vote = (s) => {
+		console.log("push_vote: " + s)
+		aanestykset[s] ++
+		setSelected(s)
+		let vote = aanestykset[s]
+		console.log("#&&&&&&&&&&&&&&&&&&&&&&&&&&")
+		
+		console.log("aanestykset[s]: " + aanestykset + " s: " + s)
+		console.log("selected: " + selected)
+		console.log("vote: " + vote)
+
+		console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+		console.log("vote: " + vote)
+		setVotes(vote)
+		console.log("votes: " + votes)
+		
+		//aanestykset[s] = votes
+		console.log("aanestykset[s] = " + aanestykset[s] )
+
+
+		console.log("aanestykset[s]: " + aanestykset[s])
+		console.log("hSelected: " + hSelected)
+		console.log("s: " + s)
+
+		let [korkein, avain] = highest_id()
+		console.log("%%%%%%%%%%%%%% korkein: " + korkein)
+		console.log("%%%%%%%%%%%%%%: avain:  " + avain)
+		setHSelected(avain)
+		setHighest(korkein)
+		
+
+		//if (aanestykset[s] > hSelected) {
+		if (selected != hSelected) {
+			console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+		
+			//setHSelected(aanestykset[s])
+
+		}
+		console.log("hSelected: " + hSelected)
+	
+
+		
+		//let [vote_count, index] = highest_id(aanestykset)
+		///if (index !== selected) {
+			//setSelected(index)
+		//	setHighest(vote_count + 1)
+		//	setVotes(votes+1)
+		//} else {
+		//	setHighest(highest + 1)
+		//}
 	}
+
+	const push_test = () => {
+		setLaskuri(laskuri + 1)
+
+	}
+	console.log("highest: " + highest)
+	console.log("selected: " + selected)
+	console.log("votes: " + votes)
 
 	return (
 		<div>
 			{props.anecdotes[selected]}<br />
-			has {aanestykset[curr_ptr()]} votes
-			<Button name="next anecdote" clb={push_button} vote_clb={push_vote} curr_ptr={curr_ptr} />
+			has {aanestykset[selected]} votes
+			<Button name="next anecdote" clb={push_button} vote_clb={() => push_vote(selected)} curr_ptr={selected} />
 			<p>
-			<Mostvotes />
+				<h1>Anecdotes with most votes</h1>
+				<p>
+					{anecdotes[hSelected]}
+					<br />
+					has {highest} votes
+				</p>
+			</p>
+			<p>
+				<Test laskuri={laskuri} name={"fookala"} saato={push_test} />
 			</p>
 		</div>
 	)
