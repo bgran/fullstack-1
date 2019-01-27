@@ -1,112 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 
-const Statistics = (props) => {
-	let g = props.data["good"]
-	let n = props.data["neutral"]
-	let b = props.data["bad"]
-
-	console.log("g: " + g)
-	console.log("n: " + n)
-	console.log("b: " + b)
-	// YHTEENSA
-	let yhteensa = g + n + b
-	console.log("Yhteensa: " + yhteensa)
-
-	let laskuri = 0
-	for (let i=0; i < g ; i++) {
-		laskuri += 1
-	}
-	for(let i =0; i<n; i++) {
-		laskuri += 0
-	}
-	for(let i=0; i<b; i++) {
-		laskuri -= 1
-	}
-
-	// KESKIARVO
-	let keskiarvo = 0
-	if  (yhteensa === 0) {
-		keskiarvo = 0
-	} else {
-		keskiarvo = laskuri/yhteensa
-	}
-	console.log("Keskiarvo: " + keskiarvo)
-
-
-	// POSITIIVISIA
-	let posi = 0
-	if  (yhteensa === 0) {
-		posi = 0
-	} else {
-		posi = (g/yhteensa) * 100
-	}
-	console.log("Positiivisia: " + posi)
-	
-	if (g === 0 && n === 0 && b === 0) {
-		return (
-			<div>Ei yhtään palautetta annettu</div>
-		)
-	}
-	return (
-		<>
-		<h1>statistiikkaa</h1>
-		<table>
-		<tr>
-			<td>
-				hyvä
-			</td>
-			<td>
-				{g}
-			</td>
-		</tr>
-		<tr>
-		 	<td>
-				neutraali
-			</td>
-			<td>
-				{n}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				huono
-			</td>
-			<td>
-				{b}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				yhteensä
-			</td>
-			<td>
-				{yhteensa}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				keskiarvo
-			</td>
-			<td>
-				{keskiarvo}
-			</td>
-		</tr>
-		<tr>
-			<td>
-				positiivisia
-			</td>
-			<td>
-				{posi} %
-			</td>
-		</tr>
-		</table>
-		</>
-
-	)
-
-}
-
 const Button = (props) => {
 
 	return (
@@ -119,42 +13,39 @@ const Button = (props) => {
 
 }
 
-const App = () => {
-	const [good, setGood] = useState(0)
-	const [neutral, setNeutral] = useState(0)
-	const [bad, setBad] = useState(0)
+const App = (props) => {
+	const [selected, setSelected] = useState(0)
+	
+	//setSelected((Math.random()*999999) % props.anecdotes.length)
+	
+	const initi = () =>
+		setSelected((Math.random()*999999) % props.anecdotes.length)
 
-	const data = {
-		"good": good,
-		"neutral": neutral,
-		"bad": bad
-	}
+	//initi()
 
-	const sGood = () => {
-		//console.log("sGood -->")
-		setGood(good + 1)
+	const push_button = () => {
+		let r = Math.round((Math.random()*999999) % (props.anecdotes.length-1))
+		console.log("My random number: " + r)
+		setSelected(r)
 	}
-	const sNeutral = () => {
-		//console.log("sNeutral ---->")
-		setNeutral(neutral + 1)
-	}
-	const sBad = () => {
-		//console.log("sBad --->")
-		setBad(bad+1)
-	}
-
+	
 	return (
 		<div>
-			<h1>Anna palautetta</h1>
-				<Button data={data} clb={sGood} name={"hyvä"} />
-				<Button data={data} clb={sNeutral} name={"neutraali"} />
-				<Button data={data} clb={sBad} name={"huono"} />
-		
-				<Statistics data={data} />
+			{props.anecdotes[selected]}
+			<Button name="next anecdote" clb={push_button}/>
 		</div>
 	)
-
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const anecdotes = [
+	  'If it hurts, do it more often',
+	  'Adding manpower to a late software project makes it later!',
+	  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+	  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+	  'Premature optimization is the root of all evil.',
+	  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+]
+
+
+ReactDOM.render(<App anecdotes={anecdotes} />, document.getElementById('root'));
 
