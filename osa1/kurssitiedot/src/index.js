@@ -3,34 +3,34 @@ import ReactDOM from 'react-dom'
 
 const Header = (props) => {
 	return (
-		<h1>{props.course}</h1>
+		<h1>{props.course_data["name"]}</h1>
 	)
 
 }
 
 const Item = (props) => {
 	return (
-		<p>
+		<div>
 			{props.name}: {props.harkkoja}
-		</p>
+		</div>
 	)
 }
 
 const Content = (props) => {
 
 	return (
-		<p>
-			{props.course_data.map((item, index) => (
-				<Item name={item["name"]} harkkoja={item["harkkoja"]} />
+		<div>
+			{props.course_data["parts"].map((item, index) => (
+				<Item name={item["name"]} harkkoja={item["harkkoja"]} key={index} />
 			))}
-		</p>
+		</div>
 	)
 }
 
 const Total = (props) => {
 	let total = 0
-	for (let i=0; i<props.course_data.length; i++) {
-		total += props.course_data[i]["harkkoja"]
+	for (let i=0; i<props.course_data["parts"].length; i++) {
+		total += props.course_data["parts"][i]["harkkoja"]
 	}
 	return (
 		<div>
@@ -40,13 +40,16 @@ const Total = (props) => {
 }
 
 const App = () => {
-	const course = 'Half Stack -sovelluskehitys'
+	//const course = 'Half Stack -sovelluskehitys'
 	
-	const course_data = [
-		{"name": "Reacting perusteet", "harkkoja":10},
-		{"name": "Tiedonvälitys propseilla", "harkkoja":7},
-		{"name": "Kompoenttien tila", "harkkoja":14}
-	]
+	const course_data = {
+		"name": "Half Stack -sovelluskehitys",
+		"parts":[
+			{"name": "Reacting perusteet", "harkkoja":10},
+			{"name": "Tiedonvälitys propseilla", "harkkoja":7},
+			{"name": "Kompoenttien tila", "harkkoja":14}
+		]
+	}
 
 
 	//const part1 = 'Reactin perusteet'
@@ -58,7 +61,7 @@ const App = () => {
 
 	return (
 		<div>
-			<Header course={course} />
+			<Header course_data={course_data} />
 			<Content course_data={course_data} />
 			<Total course_data={course_data} />
 		</div>
