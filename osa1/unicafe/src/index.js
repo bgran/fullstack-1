@@ -14,7 +14,8 @@ const Button = (props) => {
 }
 
 const App = (props) => {
-	const [selected, setSelected] = useState(0)
+	let ra =  Math.round((Math.random()*999999) % (props.anecdotes.length-1))
+	const [selected, setSelected] = useState(ra)
 	
 	//setSelected((Math.random()*999999) % props.anecdotes.length)
 	
