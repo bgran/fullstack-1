@@ -43,6 +43,11 @@ const Statistics = (props) => {
 	}
 	console.log("Positiivisia: " + posi)
 	
+	if (g === 0 && n === 0 && b === 0) {
+		return (
+			<div>Ei yhtään palautetta annettu</div>
+		)
+	}
 	return (
 		<div>
 			<h1>statistiikka</h1>
