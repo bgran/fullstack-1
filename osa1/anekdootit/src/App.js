@@ -65,9 +65,6 @@ const App = (props) => {
 		} else {
 			setSelected(r)
 		}
-
-	//	let vote = aanestykset[r]
-
 	}
 
 	const push_vote = (s) => {

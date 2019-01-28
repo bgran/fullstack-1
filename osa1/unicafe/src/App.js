@@ -6,12 +6,8 @@ const Statistics = (props) => {
 	let n = props.data["neutral"]
 	let b = props.data["bad"]
 
-	console.log("g: " + g)
-	console.log("n: " + n)
-	console.log("b: " + b)
 	// YHTEENSA
 	let yhteensa = g + n + b
-	console.log("Yhteensa: " + yhteensa)
 
 	let laskuri = 0
 	for (let i=0; i < g ; i++) {
@@ -31,7 +27,6 @@ const Statistics = (props) => {
 	} else {
 		keskiarvo = laskuri/yhteensa
 	}
-	console.log("Keskiarvo: " + keskiarvo)
 
 
 	// POSITIIVISIA
@@ -41,7 +36,6 @@ const Statistics = (props) => {
 	} else {
 		posi = (g/yhteensa) * 100
 	}
-	console.log("Positiivisia: " + posi)
 	
 	if (g === 0 && n === 0 && b === 0) {
 		return (
@@ -131,15 +125,12 @@ const App = () => {
 	}
 
 	const sGood = () => {
-		//console.log("sGood -->")
 		setGood(good + 1)
 	}
 	const sNeutral = () => {
-		//console.log("sNeutral ---->")
 		setNeutral(neutral + 1)
 	}
 	const sBad = () => {
-		//console.log("sBad --->")
 		setBad(bad+1)
 	}
 
