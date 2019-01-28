@@ -1,28 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+const App = () => {
+	const [good, setGood] = useState(0)
+	const [neutral, setNeutral] = useState(0)
+	const [bad, setBad] = useState(0)
+
+	return (
+		<div>
+			<h1>Anna palautetta</h1>
+			<p>
+				<button onClick={() => setGood(good + 1)} >hyvä</button><button onClick={() => setNeutral(neutral + 1)} >neutraali</button><button onClick={() => setBad(bad + 1)} >huono</button>
+			</p>
+			<p>
+				<h1>statistiikka</h1>
+			</p>
+			<p>
+				hyvä {good}
+			</p>
+			<p>
+				neutraalli {neutral}
+			</p>
+			<p>
+				huono {bad}
+			</p>
+
+		</div>
+	)
+
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('root'));
+
