@@ -7,38 +7,6 @@ const App = () => {
 	const [neutral, setNeutral] = useState(0)
 	const [bad, setBad] = useState(0)
 
-	let yhteensa = good + neutral + bad
-	console.log("Yhteensa: " + yhteensa)
-
-	let laskuri = 0
-	for(let i =0; i<good; i++) {
-		laskuri += 1
-	}
-	for(let i =0; i<neutral; i++) {
-		laskuri += 0
-
-	}
-	for(let i =0; i<bad; i++) {
-		laskuri -= 1
-
-	}
-	let keskiarvo = 0
-	if  (yhteensa === 0) {
-		keskiarvo = 0
-	} else {
-		keskiarvo = laskuri/yhteensa
-	}
-	console.log("Keskiarvo: "+keskiarvo)
-
-	let posi = 0
-	if  (yhteensa === 0) {
-		posi = 0
-	} else {
-		posi = (good/yhteensa)* 100
-	}
-	console.log("posi " + posi)
-
-
 	return (
 		<div>
 			<h1>Anna palautetta</h1>
@@ -48,25 +16,15 @@ const App = () => {
 			<p>
 				<h1>statistiikka</h1>
 			</p>
-			<div>
+			<p>
 				hyvä {good}
-			</div>
-			<div>
+			</p>
+			<p>
 				neutraalli {neutral}
-			</div>
-			<div>
+			</p>
+			<p>
 				huono {bad}
-			</div>
-			<div>
-				yhteensä {yhteensa}
-			</div>
-			<div>
-				keskiarvo {keskiarvo}
-			</div>
-			<div>
-				positiivisia {posi} %
-			</div>
-			
+			</p>
 
 		</div>
 	)
