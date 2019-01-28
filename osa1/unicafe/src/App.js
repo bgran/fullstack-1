@@ -149,7 +149,6 @@ const App = () => {
 				<Button data={data} clb={sGood} name={"hyvä"} />
 				<Button data={data} clb={sNeutral} name={"neutraali"} />
 				<Button data={data} clb={sBad} name={"huono"} />
-		
 				<Statistics data={data} />
 		</div>
 	)
