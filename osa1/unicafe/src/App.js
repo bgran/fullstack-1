@@ -49,27 +49,59 @@ const Statistics = (props) => {
 		)
 	}
 	return (
-		<div>
-			<h1>statistiikka</h1>
-		<div>
-			hyvä {g}
-		</div>
-		<div>
-			neutraali {n}
-		</div>
-		<div>
-			huono {b}
-		</div>
-		<div>
-			yhteensä {yhteensa}
-		</div>
-		<div>
-			keskiarvo {keskiarvo}
-		</div>
-		<div>
-			positiivisia {posi} %
-		</div>
-		</div>
+		<>
+		<h1>statistiikkaa</h1>
+		<table>
+		<tr>
+			<td>
+				hyvä
+			</td>
+			<td>
+				{g}
+			</td>
+		</tr>
+		<tr>
+		 	<td>
+				neutraali
+			</td>
+			<td>
+				{n}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				huono
+			</td>
+			<td>
+				{b}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				yhteensä
+			</td>
+			<td>
+				{yhteensa}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				keskiarvo
+			</td>
+			<td>
+				{keskiarvo}
+			</td>
+		</tr>
+		<tr>
+			<td>
+				positiivisia
+			</td>
+			<td>
+				{posi} %
+			</td>
+		</tr>
+		</table>
+		</>
 
 	)
 
