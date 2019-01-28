@@ -107,3 +107,4 @@ const anecdotes = [
 
 ReactDOM.render(<App anecdotes={anecdotes} />, document.getElementById('root'));
 
+export default App;
