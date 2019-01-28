@@ -53,13 +53,13 @@ const Button = (props) => {
 }
 
 const App = (props) => {
-	let ra =  Math.round((Math.random()*999999) % (props.anecdotes.length-1))
+	let ra =  Math.round((Math.random()*999999) % (anecdotes.length-1))
 	const [highest, setHighest] = useState(0)
 	const [hSelected, setHSelected] = useState(0)
 	const [selected, setSelected] = useState(ra)
 
 	const push_button = () => {
-		let r = Math.round((Math.random()*999999) % (props.anecdotes.length-1))
+		let r = Math.round((Math.random()*999999) % (anecdotes.length-1))
 		if (selected === r) {
 			// do nothing
 		} else {
@@ -82,7 +82,7 @@ const App = (props) => {
 
 	return (
 		<div>
-			{props.anecdotes[selected]}<br />
+			{anecdotes[selected]}<br />
 			has {aanestykset[selected]} votes
 			<Button name="next anecdote" clb={push_button} vote_clb={() => push_vote(selected)} curr_ptr={selected} />
 			<br /> <br />
