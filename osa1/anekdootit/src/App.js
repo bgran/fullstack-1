@@ -5,9 +5,70 @@ const aanestykset = {
 	0: 0,
 	1: 0,
 	2: 0,
-	3: 0,
-	4: 0,
-	5: 0
+	3: 3,
+	4: 4,
+	5: 2 
+}
+
+const highest_id = () => {
+	var max1 = 0
+	var first = 1
+	var key = 0
+	var this_key = 0
+	console.log(aanestykset.length)
+
+	for (key in aanestykset) {
+		console.log("key: " + key + ": " + aanestykset[key])
+		//var ind = parseInt(key)
+		if (first) {
+			first = 0
+			max1 = aanestykset[key]
+			this_key = key
+		} else {
+			if (max1 < aanestykset[key]) {
+				max1 = aanestykset[key]
+				console.log("max1: " + max1)
+				this_key = key
+			} else {
+				console.log("PERKL: " + max1 + " <-> " + aanestykset[key])
+			}
+		}
+
+	}
+	console.log("HUUUUUAUAH: " + this_key)
+	return ([max1, this_key])
+}
+
+const kala = (foo) => {
+	console.log("foo: " + foo)
+}
+
+const Mostvotes = () => {
+	console.log("Mostvotes")
+	kala("huortuauuahh")
+	let [vote_count, index] = highest_id(aanestykset)
+
+	console.log("index: " + index["index"])
+	console.log("max: " + vote_count+ " index: "+ index)
+
+	//if (isNaN(index)) {
+	//	return (<div>No votes for a anecdote</div>)
+	//}
+
+	console.log("anecdotes: " + anecdotes)
+	console.log("kamat: " + anecdotes[index])
+	console.log("Säätö: " + anecdotes["3"])
+	return(
+		<div>
+			<h1>Anecdote with most votes</h1>
+			<p>
+				{anecdotes[index]}
+				<br />
+				This got {vote_count} votes
+			</p>
+		</div>
+	)
+
 }
 
 const update_tbl = (which) => {
@@ -51,6 +112,9 @@ const App = (props) => {
 			{props.anecdotes[selected]}<br />
 			has {aanestykset[curr_ptr()]} votes
 			<Button name="next anecdote" clb={push_button} vote_clb={push_vote} curr_ptr={curr_ptr} />
+			<p>
+			<Mostvotes />
+			</p>
 		</div>
 	)
 }
