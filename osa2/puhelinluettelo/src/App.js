@@ -1,39 +1,9 @@
 import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-
-const Name = (props) => {
-
-	const cs = props.currsearch
-	let myarr = []
-
-	if (cs === "") myarr = props.perso
-	else {
-
-		//console.log("props: ", props)
-		props.perso.map((item, index) => {
-			//console.log("NAME: ", item)
-			//console.log("NAME2: " , index)
-			if (item["name"].includes(cs)) {
-				console.log("item name: ", item["name"])
-				console.log("cs: " , cs)
-			} else {
-				console.log("item name: ", item["name"])
-				console.log("cs: " , cs)
-				myarr.push({name: item["name"], number: item["number"]})
-			}
-		})
-	}
-
-	return (
-		<ol>
-		{myarr.map((item, index) => (
-			<li>{item["name"]}: {item["number"]}</li>
-		))}
-		</ol>
-	)
-}
+import  UserForm from './UserForm'
+import Name from './Name'
+import Filter from "./Filter"
 
 const App = (props) => {
 	//console.log("PROPSIT: ", props)
@@ -65,6 +35,7 @@ const App = (props) => {
 		}
 		setPersons(persons.concat(nameObj))
 		setNewName('')
+		setNewNumber('')
 
 		//console.log("NAPPI PAINETTU", event.target)
 	}
@@ -92,31 +63,22 @@ const App = (props) => {
 			<h2>Puhelinluettelo</h2>
 			<form>
 				<div>
-					rajaa naytettavia: <input 
-						value={searchName}
-						onChange={handleSearchName}
-					/>
+					<Filter persons={persons} searchName={searchName} searchFunc={handleSearchName} />
 				</div>
 			</form>
-			<form onSubmit={addName}>
 				<div>
-					nimi: <input 
-						value={newName}
-						onChange={handleNameChange}
-					/>
-					numero: <input	
-						value={newNumber}
-						onChange={handleNumberChange}
+					<UserForm persons={persons} form1={handleNameChange}
+						form2={handleNumberChange}
+						set_num={setNewNumber}
+						set_name={setNewName}
+						val_name={newName}
+						val_num={newNumber}
+						name_callback={addName}
 					/>
 				</div>
-				<div>
-					<button type="submit">lisää</button>
-
-				</div>
-			</form>
 			<h2>Numerot</h2>
 			<div>
-				<Name perso={persons} currsearch={searchName} />
+				<Name perso={persons} currsearch={searchName} searchFunc={handleSearchName} />
 			</div>
 		</div>
 	)
