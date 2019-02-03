@@ -1,28 +1,71 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+const Name = (props) => {
+	//console.log("props: ", props)
+	props.perso.map((item, index) => {
+		//console.log("NAME: ", item)
+		//console.log("NAME2: " , index)
+
+		
+	})
+	return (
+		<ol>
+		{props.perso.map((item, index) => (
+			<li>{index} :{item["name"]} </li>
+		))}
+		</ol>
+	)
+}
+
+const App = (props) => {
+	//console.log("PROPSIT: ", props)
+	const [ persons, setPersons ] = useState([
+		{name: 'Arto Hellas', key:1 }
+	])
+	const [ newName, setNewName ] = useState('')
+
+	const addName = (event) => {
+		event.preventDefault()
+
+		const nameObj = {
+			name: newName
+		}
+		setPersons(persons.concat(nameObj))
+		setNewName('')
+
+		//console.log("NAPPI PAINETTU", event.target)
+	}
+
+	const handleNameChange = (event) => {
+		event.preventDefault()
+		//console.log("handleNameChange")
+		setNewName(event.target.value)
+	}
+
+	return (
+		<div>
+			<h2>Puhelinluettelo</h2>
+			<div>
+				<Name perso={persons} />
+			</div>
+			<form onSubmit={addName}>
+				<div>
+					nimi: <input 
+						value={newName}
+						onChange={handleNameChange}
+					/>
+				</div>
+				<div>
+					<button type="submit">lisää</button>
+
+				</div>
+			</form>
+			<h2>Numerot</h2>
+		</div>
+	)
 }
 
 export default App;
