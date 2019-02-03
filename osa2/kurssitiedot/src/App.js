@@ -27,17 +27,17 @@ const Content = (props) => {
         )
 }
 
-//const Total = (props) => {
-//        let total = 0
-//        for (let i=0; i<props.course_data["parts"].length; i++) {
-//                total += props.course_data["parts"][i]["harkkoja"]
-//        }
-//        return (
-//                <div>
-//                        {total} harkkoja
-//                </div>
-//        )
-//}
+const Total = (props) => {
+        let total = 0
+        for (let i=0; i<props.course_data["parts"].length; i++) {
+                total += props.course_data["parts"][i]["exercises"]
+        }
+        return (
+                <div>
+                        yhteensä {total} tehtävää
+                </div>
+        )
+}
 
 const Course = (props) => {
 	console.log("Course ->")
@@ -45,6 +45,7 @@ const Course = (props) => {
 		<div>
 			<Header course={props.course} />
 			<Content course={props.course} />
+			<Total course_data={props.course} />
 		</div>
 	)
 
