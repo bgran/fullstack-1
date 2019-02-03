@@ -4,16 +4,31 @@ import './App.css';
 
 
 const Name = (props) => {
-	//console.log("props: ", props)
-	props.perso.map((item, index) => {
-		//console.log("NAME: ", item)
-		//console.log("NAME2: " , index)
 
-		
-	})
+	const cs = props.currsearch
+	let myarr = []
+
+	if (cs === "") myarr = props.perso
+	else {
+
+		//console.log("props: ", props)
+		props.perso.map((item, index) => {
+			//console.log("NAME: ", item)
+			//console.log("NAME2: " , index)
+			if (item["name"].includes(cs)) {
+				console.log("item name: ", item["name"])
+				console.log("cs: " , cs)
+			} else {
+				console.log("item name: ", item["name"])
+				console.log("cs: " , cs)
+				myarr.push({name: item["name"], number: item["number"]})
+			}
+		})
+	}
+
 	return (
 		<ol>
-		{props.perso.map((item, index) => (
+		{myarr.map((item, index) => (
 			<li>{item["name"]}: {item["number"]}</li>
 		))}
 		</ol>
@@ -27,6 +42,7 @@ const App = (props) => {
 	])
 	const [ newName, setNewName ] = useState('')
 	const [ newNumber, setNewNumber ] = useState('')
+	const [ searchName, setSearchName ] = useState('')
 
 	const addName = (event) => {
 		event.preventDefault()
@@ -65,9 +81,23 @@ const App = (props) => {
 		setNewNumber(event.target.value)
 	}
 
+	const handleSearchName = (props) => {
+		console.log("handleSearchName ->")
+		const needle = props.target.value
+		setSearchName(needle)
+	}
+
 	return (
 		<div>
 			<h2>Puhelinluettelo</h2>
+			<form>
+				<div>
+					rajaa naytettavia: <input 
+						value={searchName}
+						onChange={handleSearchName}
+					/>
+				</div>
+			</form>
 			<form onSubmit={addName}>
 				<div>
 					nimi: <input 
@@ -86,7 +116,7 @@ const App = (props) => {
 			</form>
 			<h2>Numerot</h2>
 			<div>
-				<Name perso={persons} />
+				<Name perso={persons} currsearch={searchName} />
 			</div>
 		</div>
 	)
