@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom'
 
 const Header = (props) => {
         return (
-                <h1>{props.course["name"]}</h1>
-        )
-
+                <h1>{props.course_name}</h1>
+       )
 }
 
 const Part = (props) => {
@@ -28,26 +27,13 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
-        //let total = 0
-        //for (let i=0; i<props.course_data["parts"].length; i++) {
-         //       total += props.course_data["parts"][i]["exercises"]
-        //}
+	const ind = props.ind
 	const o = props.course_data
 
-	//function get_sum(total, num) { return total["exercises"] + num["exercises"] }
-	//const tot = o["parts"].reduce(get_sum)
-	//const _tot = 
-		//props.course_data["parts"].reduce((s, p) => {
-		//	console.log("What is ahppenikng: ", s["exercises"] , p["exercises"])
-		//	return s + p
-		//})
-
-
-	const w_tot = o["parts"].reduce((a, b) => {
+	const o2 = o
+	const w_tot = o2["parts"].reduce((a, b) => {
 		return a + b["exercises"]
 	}, 0 )
-
-	console.log("w_tot: ", w_tot)
 
         return (
                 <div>
@@ -57,25 +43,48 @@ const Total = (props) => {
 }
 
 const Course = (props) => {
-	console.log("Course ->")
+	let o = props.course
+	let i = props.ind
 	return (
 		<div>
-			<Header course={props.course} />
-			<Content course={props.course} />
-			<Total course_data={props.course} />
+			<h2>{o["name"]}</h2>
+			<Content course={o} />
+			<Total course_data={o} ind={i} />
+		</div>
+	)
+}
+const Courses = (props) => {
+	let o = props.courses
+	return (
+		<div>
+			<Header course_name={"Opetusohjelma"} />
+			{o.map((item, index) => (
+				<Course course={item} ind={index} />
+			)) }
 		</div>
 	)
 
 }
 const App = () => {
-        const course = {
-                "name": "Half Stack -sovelluskehitys",
-                "parts":[
-                        {"name": "Reacting perusteet", "exercises":10, id:1},
-                        {"name": "Tiedonvälitys propseilla", "exercises":7, id:2},
-                        {"name": "Kompoenttien tila", "exercises":14, id:3}
-                ]
-        }
+	const courses = [
+		{
+                	"name": "Half Stack -sovelluskehitys",
+			id:1,
+                	"parts":[
+                        	{"name": "Reacting perusteet", "exercises":10, id:1},
+                        	{"name": "Tiedonvälitys propseilla", "exercises":7, id:2},
+                        	{"name": "Kompoenttien tila", "exercises":14, id:3}
+			]
+		},
+		{
+			"name": "Node.js",
+			"id"  : 2,
+			"parts": [
+				{"name": "Routing", "exercises":3, id:1},
+				{"name": "Middlewaret", "exercises":7, id:2}
+			]
+		}
+	]
 
 
         //const part1 = 'Reactin perusteet'
@@ -87,7 +96,7 @@ const App = () => {
 
         return (
                 <div>
-			<Course course={course} />
+			<Courses courses={courses} />
                 </div>
 		
         )
