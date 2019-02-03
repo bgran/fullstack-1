@@ -14,7 +14,7 @@ const Name = (props) => {
 	return (
 		<ol>
 		{props.perso.map((item, index) => (
-			<li>{item["name"]} </li>
+			<li>{item["name"]}: {item["number"]}</li>
 		))}
 		</ol>
 	)
@@ -23,9 +23,10 @@ const Name = (props) => {
 const App = (props) => {
 	//console.log("PROPSIT: ", props)
 	const [ persons, setPersons ] = useState([
-		{name: 'Arto Hellas', key:1 }
+		{name: 'Arto Hellas', key:1, number: "666-1234-1234" }
 	])
 	const [ newName, setNewName ] = useState('')
+	const [ newNumber, setNewNumber ] = useState('')
 
 	const addName = (event) => {
 		event.preventDefault()
@@ -43,7 +44,8 @@ const App = (props) => {
 
 
 		const nameObj = {
-			name: newName
+			name: newName,
+			number: newNumber
 		}
 		setPersons(persons.concat(nameObj))
 		setNewName('')
@@ -57,17 +59,24 @@ const App = (props) => {
 		setNewName(event.target.value)
 	}
 
+	const handleNumberChange = (event) => {
+		event.preventDefault()
+		console.log("handlenNumberChange")
+		setNewNumber(event.target.value)
+	}
+
 	return (
 		<div>
 			<h2>Puhelinluettelo</h2>
-			<div>
-				<Name perso={persons} />
-			</div>
 			<form onSubmit={addName}>
 				<div>
 					nimi: <input 
 						value={newName}
 						onChange={handleNameChange}
+					/>
+					numero: <input	
+						value={newNumber}
+						onChange={handleNumberChange}
 					/>
 				</div>
 				<div>
@@ -76,6 +85,9 @@ const App = (props) => {
 				</div>
 			</form>
 			<h2>Numerot</h2>
+			<div>
+				<Name perso={persons} />
+			</div>
 		</div>
 	)
 }
