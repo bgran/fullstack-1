@@ -28,13 +28,30 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
-        let total = 0
-        for (let i=0; i<props.course_data["parts"].length; i++) {
-                total += props.course_data["parts"][i]["exercises"]
-        }
+        //let total = 0
+        //for (let i=0; i<props.course_data["parts"].length; i++) {
+         //       total += props.course_data["parts"][i]["exercises"]
+        //}
+	const o = props.course_data
+
+	//function get_sum(total, num) { return total["exercises"] + num["exercises"] }
+	//const tot = o["parts"].reduce(get_sum)
+	//const _tot = 
+		//props.course_data["parts"].reduce((s, p) => {
+		//	console.log("What is ahppenikng: ", s["exercises"] , p["exercises"])
+		//	return s + p
+		//})
+
+
+	const w_tot = o["parts"].reduce((a, b) => {
+		return a + b["exercises"]
+	}, 0 )
+
+	console.log("w_tot: ", w_tot)
+
         return (
                 <div>
-                        yhteensä {total} tehtävää
+                        yhteensä {w_tot} tehtävää
                 </div>
         )
 }
