@@ -14,7 +14,7 @@ const Name = (props) => {
 	return (
 		<ol>
 		{props.perso.map((item, index) => (
-			<li>{index} :{item["name"]} </li>
+			<li>{item["name"]} </li>
 		))}
 		</ol>
 	)
@@ -29,6 +29,18 @@ const App = (props) => {
 
 	const addName = (event) => {
 		event.preventDefault()
+
+		const needle = newName
+
+		for (const nam in persons) {
+			const real_name = persons[nam]["name"]
+			console.log("in search func", real_name, needle)
+			if (real_name == needle) {
+				alert(needle + " on jo luettelossa")
+				return
+			}
+		}
+
 
 		const nameObj = {
 			name: newName
