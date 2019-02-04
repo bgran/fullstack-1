@@ -11,6 +11,8 @@ const Name = (props) => {
         const cs = props.currsearch
         let myarr = []
 
+	//return "FOOOO"
+	if (props.perso === undefined) { return "TYYHJÄÄ TÄYNÄ" }
         if (cs === "") myarr = props.perso
         else {
 
