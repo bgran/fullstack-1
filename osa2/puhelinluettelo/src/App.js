@@ -50,10 +50,17 @@ const App = (props) => {
 		}
 	}
 
+	const db_addName = (d) => {
+		axios
+			.post('http://snowcrash.havoc.fi:3001/persons', d)
+			.then(response => { console.log(response) }
+			)
+
+	}
 	const addName = (event) => {
 		event.preventDefault()
 
-		const needle = newName
+		/*const needle = newName
 
 		for (const nam in persons) {
 			const real_name = persons[nam]["name"]
@@ -63,7 +70,7 @@ const App = (props) => {
 				return
 			}
 		}
-
+		*/
 
 		const nameObj = {
 			name: newName,
@@ -73,6 +80,8 @@ const App = (props) => {
 		setPersons(persons.concat(nameObj))
 		setNewName('')
 		setNewNumber('')
+
+		db_addName(nameObj)
 
 		//console.log("NAPPI PAINETTU", event.target)
 	}
