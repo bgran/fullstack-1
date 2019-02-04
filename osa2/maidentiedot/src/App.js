@@ -9,6 +9,15 @@ import axios from 'axios'
 
 const Country = (props) => {
 	const o = props.data
+	const chosen = props.chosen
+	if (chosen == "") {
+		return (
+			<div>
+				Chosen empty
+			</div>
+		)
+	}
+	
 	if (o.length == 1) {
 		const d = o[0]
 		console.log("Country:", d)
@@ -31,7 +40,7 @@ const Country = (props) => {
 	} else {
 		return (
 			<div>
-				Too many countries match
+			null
 			</div>
 		)
 	}
@@ -40,8 +49,21 @@ const Country = (props) => {
 const Countries = (props) => {
 	const cs = props.searchText
 	const co = props.countries
-
+	const chosen = prop.chosen
+	
 	console.log("co: ", co)
+
+	if (chosen != "") {
+		const lc_c = chosen.toLowerCase()
+		const _data = co
+		const myobj = {}
+		_data.map((item, index) => {
+			const lc_s = item[
+		}
+
+
+	}
+
 
 	let myarr = []
 	if (cs === "") myarr = co
@@ -70,10 +92,10 @@ const Countries = (props) => {
 			<div>
 				<ol>
 					{myarr.map((item, index) => (
-						<li>{item["name"]}</li>
+						<li>{item["name"]} <button </li>
 					))}
 				</ol>
-				<Country data={myarr} />
+				<Country data={myarr} chosen={props.chosen} />
 			</div>
 		)
 	}
@@ -84,6 +106,7 @@ const App = (props) => {
 
 	const [ countries, setCountries ] = useState([])
 	const [ searchText, setSearchText ] = useState("")
+	const [ chosenCountry, setChosen ] = useState("")
 
 	useEffect(() => {
 		console.log("in useEffect")
@@ -96,7 +119,11 @@ const App = (props) => {
 		promise.then(eventHandler)
 	}, [])
 
-
+	const handleChosen = (event) => {
+		console.log("handleChosen: ---------------------->")
+		event.preventDefault()
+		setChosen(event.target.value)
+	}
 
 	const handleSearchName = (props) => {
 		console.log("handleSearchName ->")
@@ -104,6 +131,7 @@ const App = (props) => {
 		if (needle == "") return
 		setSearchText(needle)
 	}
+
 
 	console.log("countries: lopussa  ", countries)
 
@@ -113,7 +141,7 @@ const App = (props) => {
 				onChange={handleSearchName}
 			/ >
 			<button type="submit">Search</button>
-			<Countries searchText={searchText} countries={countries} />
+			<Countries searchText={searchText} countries={countries} chosen={chosenCountry} callback={handleChosen} />
 		</div>
 	)
 }
