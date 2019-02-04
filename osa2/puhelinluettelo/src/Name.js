@@ -20,7 +20,7 @@ const Name = (props) => {
                 props.perso.map((item, index) => {
                         //console.log("NAME: ", item)
                         //console.log("NAME2: " , index)
-                        if (item["name"].includes(cs)) {
+                        if (!item["name"].includes(cs)) {
                                 console.log("item name: ", item["name"])
                                 console.log("cs: " , cs)
                         } else {
