@@ -34,7 +34,11 @@ const Name = (props) => {
         return (
                 <ol>
                 {myarr.map((item, index) => (
-                        <li>{item["name"]}: {item["number"]}</li>
+                        <li>{item["name"]}: {item["number"]} {item["id"]} <button
+				id={item["id"]}
+				onClick={props.delFunc}
+				data={item}
+			>posista</button></li>
                 ))}
                 </ol>
         )

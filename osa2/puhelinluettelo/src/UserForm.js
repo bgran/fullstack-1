@@ -27,6 +27,7 @@ const UserForm = (props) => {
 						value={val_name}
 						onChange={null_editN}
 					/>
+					<br />
 					numero: <input
 						value={val_num}
 						onChange={null_editNu}
